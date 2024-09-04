@@ -11,7 +11,7 @@ from mplturtle import *
 # In[ ]:
 
 
-reset()  # only include figsize for class
+reset()  # only include figsize for the projector in class
 forward(50)
 right(30)
 forward(50)
@@ -20,7 +20,7 @@ forward(50)
 # In[ ]:
 
 
-reset(figsize=(3,3))  # only include figsize for class
+reset(figsize=(3,3))  # only include figsize for the projector in class
 forward(50)
 right(30)
 forward(50)
@@ -31,7 +31,7 @@ forward(50)
 # In[ ]:
 
 
-reset(figsize=(3,3))  # only include figsize for class
+reset(figsize=(3,3))  # only include figsize for the projector in class
 pencolor("red")
 forward(50)
 right(90)
@@ -120,6 +120,28 @@ pendown()
 
 square(80)
 
+
+
+# In[ ]:
+
+
+reset(figsize=(3,3))  # only include figsize for class
+pencolor("red")
+
+forward(100)
+right(20)
+forward(100)
+
+
+# In[ ]:
+
+
+reset(figsize=(3,3))  # only include figsize for class
+pencolor("red")
+
+forward(100)
+right(50)
+forward(100)
 
 
 # In[ ]:
