@@ -189,5 +189,74 @@ for bob in range(200):
 # In[ ]:
 
 
+reset(figsize=(3,3))  # only include figsize for the projector in class
+
+forward(50)
+right(90)
+forward(50)
+right(90)
+forward(50)
+right(90)
+forward(50)
+right(90)
+
+
+# In[ ]:
+
+
+def square():
+    forward(50)
+    right(90)
+    forward(50)
+    right(90)
+    forward(50)
+    right(90)
+    forward(50)
+    right(90)
+
+
+# In[ ]:
+
+
+reset(figsize=(3,3))  # only include figsize for the projector in class
+square()
+
+
+# In[ ]:
+
+
+reset(figsize=(3,3))  # only include figsize for the projector in class
+square()
+
+penup()
+forward(100)
+pendown()
+
+square()
+
+
+# In[ ]:
+
+
+def forward_up(distance):
+    penup()
+    forward(distance)
+    pendown()
+
+
+# In[ ]:
+
+
+reset(figsize=(3,3))  # only include figsize for the projector in class
+square()
+
+forward_up(100)
+
+square()
+
+
+# In[ ]:
+
+
 
 
