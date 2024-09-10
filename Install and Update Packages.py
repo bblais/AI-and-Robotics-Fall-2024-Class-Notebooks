@@ -3,16 +3,37 @@
 
 # ## Sprint #1
 
-# In[1]:
+# In[ ]:
 
 
 get_ipython().system('pip install "git+https://github.com/bblais/Game" --upgrade')
 
 
-# In[2]:
+# In[ ]:
 
 
 import Game
+
+
+# If you happen the error "Cannot find command 'git'", then you need to install git.
+# 
+# - open an anaconda prompt
+# - type `conda install -c anaconda git`
+
+# if you get this error:
+
+# In[ ]:
+
+
+from game import *
+
+
+# Remember that `Game` is different than `game`.
+
+# In[ ]:
+
+
+
 
 
 # ## Sprint #2
@@ -31,31 +52,31 @@ pip install "git+https://github.com/bblais/Robot373" --upgrade
 
 # ## Sprint #4
 
-# In[3]:
+# In[ ]:
 
 
 get_ipython().system('pip install scikit-learn')
 
 
-# In[4]:
+# In[ ]:
 
 
 get_ipython().system('pip install "git+https://github.com/bblais/classy" --upgrade')
 
 
-# In[1]:
+# In[ ]:
 
 
 get_ipython().system('pip install "git+https://github.com/bblais/NumpyNet" --upgrade')
 
 
-# In[3]:
+# In[ ]:
 
 
 get_ipython().system('pip install tqdm')
 
 
-# In[1]:
+# In[ ]:
 
 
 get_ipython().system('pip install opencv-python')
