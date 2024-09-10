@@ -57,5 +57,106 @@ valid_moves(2,1)
 # In[ ]:
 
 
+def update_state(state,player,move):
+    new_state=state-move
+    return new_state
+
+
+# In[ ]:
+
+
+update_state(21,1,3)
+
+
+# In[ ]:
+
+
+def win_status(new_state,player):
+    
+    if new_state==1:
+        return "win"
+    
+    if new_state==0:
+        return "lose"
+    
+    return None
+    
+    
+
+
+# In[ ]:
+
+
+def show_state(state,player):
+    print(state)
+
+
+# ## Agents
+
+# In[ ]:
+
+
+def human_move(state,player):
+    
+    while True:
+        move=eval(input("Enter your move"))
+
+        if move not in valid_moves(state,player):
+            print("That is not a valid move")
+        else:
+            break
+    
+    return move
+
+human_agent=Agent(human_move)
+
+
+# In[ ]:
+
+
+def monkey_move(state,player):
+    return random.choice(valid_moves(state,player))
+monkey_agent=Agent(monkey_move)
+
+
+# In[ ]:
+
+
+monkey_move(21,1)
+
+
+# In[ ]:
+
+
+state=initial_state()
+
+
+# In[ ]:
+
+
+human_move(state,1)
+
+
+# In[ ]:
+
+
+g=Game()
+
+
+# In[ ]:
+
+
+g.run(human_agent,human_agent)
+
+
+# In[ ]:
+
+
+g.run(human_agent,monkey_agent)
+
+
+# In[ ]:
+
+
 
 
