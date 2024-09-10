@@ -270,7 +270,7 @@ update_state(state,1,[6,7])
 # In[ ]:
 
 
-def win_status(new_state,player):
+def win_status(state,player):
     # 0  1  2 
     # 3  4  5 
     # 6  7  8 
@@ -297,7 +297,7 @@ def win_status(new_state,player):
     if state[6]==state[4]==state[2]==player:
         return "win"
     
-    if not valid_moves(new_state,other_player):
+    if not valid_moves(state,other_player):
         return "stalemate"
     
     return None
@@ -339,14 +339,22 @@ monkey_agent=Agent(monkey_move)
 # In[ ]:
 
 
-human_move(state,1)
+g=Game()
+g.run(monkey_agent,monkey_agent)
 
 
 # In[ ]:
 
 
-g=Game()
-g.run(monkey_agent,monkey_agent)
+state=initial_state()
+state.board=[2,1,2,2,1,1,0,1,0]
+state
+
+
+# In[ ]:
+
+
+win_status(state,1)
 
 
 # In[ ]:
