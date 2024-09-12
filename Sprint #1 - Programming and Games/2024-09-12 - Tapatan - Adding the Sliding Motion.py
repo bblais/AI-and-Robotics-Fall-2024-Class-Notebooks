@@ -133,6 +133,12 @@ row(state,5),col(state,5)
 # In[ ]:
 
 
+state.row(5),state.col(5)
+
+
+# In[ ]:
+
+
 player=1
 start=7
 rs,cs=row(state,start),col(state,start)
