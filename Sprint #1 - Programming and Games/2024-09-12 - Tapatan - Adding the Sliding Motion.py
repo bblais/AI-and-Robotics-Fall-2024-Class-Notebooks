@@ -42,6 +42,17 @@ def count_pieces(state):
 # In[ ]:
 
 
+def row(state,location):
+    r,c=state.rc_from_index(location)
+    return r
+def col(state,location):
+    r,c=state.rc_from_index(location)
+    return c
+
+
+# In[ ]:
+
+
 def valid_moves(state,player):
     
     moves=[]
@@ -111,17 +122,6 @@ for location in [3,6,8]:
     state[location]=2
     
 state
-
-
-# In[ ]:
-
-
-def row(state,location):
-    r,c=state.rc_from_index(location)
-    return r
-def col(state,location):
-    r,c=state.rc_from_index(location)
-    return c
 
 
 # In[ ]:
