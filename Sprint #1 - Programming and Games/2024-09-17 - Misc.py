@@ -261,5 +261,35 @@ valid_moves(state,1)
 # In[ ]:
 
 
+state=Board(6,7)
+state.show_locations()
+
+
+# In[ ]:
+
+
+loc=8
+if state[loc]==player and state[loc+8]==player and state[loc+16]==player and state[loc+24]==player:
+    return 'win'
+
+
+# In[ ]:
+
+
+for loc in [0,1,2,3,7,8,9,10,14,15,16,17]:
+    if state[loc]==player and state[loc+8]==player and state[loc+16]==player and state[loc+24]==player:
+        return 'win'
+
+
+# In[ ]:
+
+
+for i in list(range(6))+list(range(3)):
+    print(i)
+
+
+# In[ ]:
+
+
 
 
