@@ -238,5 +238,29 @@ g.report()
 # In[ ]:
 
 
+state=initial_state()
+
+
+# In[ ]:
+
+
+state.show_locations()
+
+
+# In[ ]:
+
+
+state.row(5)
+
+
+# In[ ]:
+
+
+state.col(5)
+
+
+# In[ ]:
+
+
 
 
