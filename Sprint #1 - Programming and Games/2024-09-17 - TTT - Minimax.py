@@ -12,7 +12,7 @@ from Game import *
 # 1. `initial_state()`   return the state for the start of the game
 # 2. `valid_moves(state,player)` return a list of valid moves
 # 3. `update_state(state, player, move )` return the new state
-# 4. `win_status(new_state,player)` returns one of `"win"`,`"lose"`,`"stalemate"` or `None`
+# 4. `win_status(state,player)` returns one of `"win"`,`"lose"`,`"stalemate"` or `None`
 
 # ![image.png](attachment:bc05fd5e-23d8-4805-80af-ee57c896029f.png)
 
