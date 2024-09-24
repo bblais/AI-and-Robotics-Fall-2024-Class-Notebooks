@@ -190,19 +190,19 @@ def show_state(state,player):
 # In[ ]:
 
 
-def monkey_move(state,player):
-    return random.choice(valid_moves(state,player))
-monkey_agent=Agent(monkey_move)
-
-
-# In[ ]:
-
-
 from Game.minimax import *
 def minimax_move(state,player):
     values,actions=minimax_values(state,player,display=False,maxdepth=12)
     return top_choice(actions,values)
 minimax_agent=Agent(minimax_move)
+
+
+# In[ ]:
+
+
+def monkey_move(state,player):
+    return random.choice(valid_moves(state,player))
+monkey_agent=Agent(monkey_move)
 
 
 # In[ ]:
