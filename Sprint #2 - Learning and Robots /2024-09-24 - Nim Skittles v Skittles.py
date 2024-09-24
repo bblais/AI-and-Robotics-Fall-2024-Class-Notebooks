@@ -304,6 +304,24 @@ SaveTable(skittles_agent1.S,'nim skittles1.json')
 SaveTable(skittles_agent2.S,'nim skittles2.json')
 
 
+# ## Test the agent
+
+# In[ ]:
+
+
+g=Game()
+g.run(human_agent,agent2)
+
+
+# In[ ]:
+
+
+g=Game(number_of_games=100)
+g.display=False
+result=g.run(minimax_agent,agent2)
+g.report()
+
+
 # In[ ]:
 
 
