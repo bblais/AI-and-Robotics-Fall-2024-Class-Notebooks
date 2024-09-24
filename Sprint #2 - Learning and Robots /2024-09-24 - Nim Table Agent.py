@@ -188,5 +188,43 @@ g.run(table_agent,monkey_agent)
 # In[ ]:
 
 
+T=Table()
+for state in range(1,22):
+    T[state]=Table()
+    
+    for move in [1,2,3]:
+        
+        if move>state:
+            continue
+        
+        T[state][move]=-100
+        
+        if state%4==0:  # 4, 8, 12, 16, etc...
+            T[state][3]=+100
+            
+        if state%4==3:  # 3, 7, 11, etc...
+            T[state][2]=+100
+
+        if state%4==2:  # 2, 6, 10, etc...
+            T[state][1]=+100
+
+        if state%4==1:  # 1, 5, 9, etc...
+            pass
+        
+        
+            
+
+T
+
+
+# In[ ]:
+
+
+10%3
+
+
+# In[ ]:
+
+
 
 
