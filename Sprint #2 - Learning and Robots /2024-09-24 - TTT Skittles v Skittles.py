@@ -411,3 +411,9 @@ g.display=False
 result=g.run(skittles_agent1,minimax_agent)
 g.report()
 
+
+# In[ ]:
+
+
+
+
