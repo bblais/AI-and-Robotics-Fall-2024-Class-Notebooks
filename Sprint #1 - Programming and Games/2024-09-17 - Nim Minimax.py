@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
+# In[1]:
 
 
 from Game import *
@@ -17,14 +17,14 @@ from Game import *
 # - What is state for this game:  single #
 # - What is a move for this game: single #. (1,2, or 3)
 
-# In[ ]:
+# In[2]:
 
 
 def initial_state():
     return 999
 
 
-# In[ ]:
+# In[3]:
 
 
 def valid_moves(state,player):
@@ -36,7 +36,7 @@ def valid_moves(state,player):
         return [1,2,3 ]
 
 
-# In[ ]:
+# In[4]:
 
 
 def update_state(state,player,move):
@@ -44,7 +44,7 @@ def update_state(state,player,move):
     return new_state
 
 
-# In[ ]:
+# In[5]:
 
 
 def win_status(new_state,player):
@@ -60,7 +60,7 @@ def win_status(new_state,player):
     
 
 
-# In[ ]:
+# In[6]:
 
 
 def show_state(state,player):
@@ -69,7 +69,7 @@ def show_state(state,player):
 
 # ## Agents
 
-# In[ ]:
+# In[7]:
 
 
 def human_move(state,player):
@@ -87,7 +87,7 @@ def human_move(state,player):
 human_agent=Agent(human_move)
 
 
-# In[ ]:
+# In[8]:
 
 
 def monkey_move(state,player):
@@ -95,13 +95,13 @@ def monkey_move(state,player):
 monkey_agent=Agent(monkey_move)
 
 
-# In[ ]:
+# In[9]:
 
 
 from Game.minimax import *
 
 
-# In[ ]:
+# In[10]:
 
 
 def minimax_move(state,player):
@@ -110,10 +110,11 @@ def minimax_move(state,player):
 minimax_agent=Agent(minimax_move)
 
 
-# In[ ]:
+# In[12]:
 
 
-minimax_values(4,1)  # state, player
+state=4
+minimax_values(state,1)  # state, player
 
 
 # In[ ]:
