@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
+# In[1]:
 
 
 from Game import *
@@ -20,14 +20,14 @@ from Game import *
 # - What is state for this game:  3dx3 Board (9 numbers) 0 = empty, 1 = player 1 and 2 = player 2
 # - What is a move for this game: single # (0-8 for the square locations) after 6 pieces, move = [start,end]
 
-# In[ ]:
+# In[2]:
 
 
 def initial_state():
     return Board(3,3)
 
 
-# In[ ]:
+# In[3]:
 
 
 def count_pieces(state):
@@ -39,7 +39,7 @@ def count_pieces(state):
     return count
 
 
-# In[ ]:
+# In[4]:
 
 
 def row(state,location):
@@ -50,7 +50,7 @@ def col(state,location):
     return c
 
 
-# In[ ]:
+# In[5]:
 
 
 def valid_moves(state,player):
@@ -103,7 +103,7 @@ def valid_moves(state,player):
     
 
 
-# In[ ]:
+# In[6]:
 
 
 def update_state(state,player,move):
@@ -120,7 +120,7 @@ def update_state(state,player,move):
     return new_state
 
 
-# In[ ]:
+# In[7]:
 
 
 def win_status(state,player):
@@ -156,7 +156,7 @@ def win_status(state,player):
     return None
 
 
-# In[ ]:
+# In[8]:
 
 
 def human_move(state,player):
@@ -178,14 +178,14 @@ def human_move(state,player):
 human_agent=Agent(human_move)
 
 
-# In[ ]:
+# In[9]:
 
 
 def show_state(state,player):
     print(state)
 
 
-# In[ ]:
+# In[10]:
 
 
 def monkey_move(state,player):
@@ -193,7 +193,7 @@ def monkey_move(state,player):
 monkey_agent=Agent(monkey_move)
 
 
-# In[ ]:
+# In[11]:
 
 
 from Game.minimax import *
@@ -201,6 +201,25 @@ def minimax_move(state,player):
     values,actions=minimax_values(state,player,display=False)
     return top_choice(actions,values)
 minimax_agent=Agent(minimax_move)
+
+
+# ![image.png](attachment:79374413-5431-4bd6-b94e-87abab72db5e.png)
+
+# In[12]:
+
+
+state=Board(3,3)
+for loc in [0,7,8]:
+    state[loc]=2
+for loc in [2,3,6]:
+    state[loc]=1
+state
+
+
+# In[13]:
+
+
+minimax_values(state,player=1)
 
 
 # In[ ]:
