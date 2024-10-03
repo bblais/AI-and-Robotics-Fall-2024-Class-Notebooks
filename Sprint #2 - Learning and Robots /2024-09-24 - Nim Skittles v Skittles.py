@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
+# In[1]:
 
 
 from Game import *
@@ -10,7 +10,7 @@ from Game.minimax import *
 
 # ## Nim 
 
-# In[ ]:
+# In[2]:
 
 
 def initial_state(): 
@@ -59,7 +59,7 @@ def win_status(state,player):
 
 # ## Agents
 
-# In[ ]:
+# In[3]:
 
 
 def random_move(state,player):    
@@ -84,7 +84,7 @@ def human_move(state,player):
 human_agent=Agent(human_move)
 
 
-# In[ ]:
+# In[4]:
 
 
 def minimax_move(state,player):
@@ -101,7 +101,7 @@ minimax_agent=Agent(minimax_move)
 
 
 
-# In[ ]:
+# In[5]:
 
 
 def skittles_move(state,player,info):
@@ -197,7 +197,7 @@ def skittles_after(status,player,info):
     
 
 
-# In[ ]:
+# In[6]:
 
 
 skittles_agent1=Agent(skittles_move)
@@ -211,7 +211,7 @@ skittles_agent2.post=skittles_after
 skittles_agent2.verbose=False
 
 
-# In[ ]:
+# In[7]:
 
 
 def perfect_move(state,player):
@@ -231,29 +231,29 @@ perfect_agent=Agent(perfect_move)
 
 
 
-# In[ ]:
+# In[8]:
 
 
 g=Game()
 g.run(skittles_agent1,skittles_agent2)
 
 
-# In[ ]:
+# In[9]:
 
 
 SaveTable(skittles_agent1.S,'nim skittles1.json')
 SaveTable(skittles_agent2.S,'nim skittles2.json')
 
 
-# In[ ]:
+# In[10]:
 
 
 get_ipython().run_line_magic('matplotlib', 'inline')
 from matplotlib.pyplot import figure,plot,grid,legend,xlabel,ylabel,title
-from tqdm.notebook import tqdm
+from tqdm import tqdm
 
 
-# In[ ]:
+# In[11]:
 
 
 agent1=skittles_agent1
@@ -263,14 +263,14 @@ agent2=skittles_agent2
 agent2.S=Table()
 
 
-# In[ ]:
+# In[12]:
 
 
 S=Storage()
 one,two,ties,N=0,0,0,0
 
 
-# In[ ]:
+# In[13]:
 
 
 for i in tqdm(range(30)):
@@ -285,7 +285,7 @@ for i in tqdm(range(30)):
 y1,y2,y0,x=S.arrays()    
 
 
-# In[ ]:
+# In[14]:
 
 
 figure(figsize=(16,8))
@@ -297,7 +297,7 @@ xlabel('Number of Games')
 ylabel('Percent')
 
 
-# In[ ]:
+# In[15]:
 
 
 SaveTable(skittles_agent1.S,'nim skittles1.json')
@@ -313,13 +313,19 @@ g=Game()
 g.run(human_agent,skittles_agent2)
 
 
-# In[ ]:
+# In[17]:
 
 
 g=Game(number_of_games=100)
 g.display=False
 result=g.run(minimax_agent,agent2)
 g.report()
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:

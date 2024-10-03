@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[4]:
+# In[1]:
 
 
 from Game import *
@@ -16,12 +16,12 @@ from Game.minimax import *
 
 # ## NimPlus 
 
-# In[5]:
+# In[2]:
 
 
-def initial_state(): 
+def initial_state(N=21): 
     """ returns  - The initial state of the game"""
-    return 21
+    return N
 
 def valid_moves(state,player):
     """returns  - a list of the valid moves for the state and player"""
@@ -67,7 +67,7 @@ def win_status(state,player):
 
 # ## Agents
 
-# In[6]:
+# In[3]:
 
 
 def random_move(state,player):    
@@ -92,7 +92,7 @@ def human_move(state,player):
 human_agent=Agent(human_move)
 
 
-# In[7]:
+# In[4]:
 
 
 def minimax_move(state,player):
@@ -109,7 +109,7 @@ minimax_agent=Agent(minimax_move)
 
 
 
-# In[8]:
+# In[5]:
 
 
 def skittles_move(state,player,info):
@@ -195,6 +195,18 @@ def skittles_after(status,player,info):
         else:
             if verbose:
                 print("\t","No last state, so nothing to learn.")
+    elif status=='win':
+        if last_state:
+            S[last_state][last_action]=S[last_state][last_action]+1
+                
+            if verbose:
+                print("\t","Modifying the table: adding one skittle from (state,action) ",last_state,last_action)
+                print("\t","Table:",S)
+
+                
+        else:
+            if verbose:
+                print("\t","No last state, so nothing to learn.")
             
                 
     else:
@@ -205,7 +217,7 @@ def skittles_after(status,player,info):
     
 
 
-# In[9]:
+# In[6]:
 
 
 skittles_agent1=Agent(skittles_move)
@@ -219,21 +231,21 @@ skittles_agent2.post=skittles_after
 skittles_agent2.verbose=False
 
 
-# In[11]:
+# In[7]:
 
 
 g=Game()
 g.run(skittles_agent1,skittles_agent2)
 
 
-# In[12]:
+# In[8]:
 
 
 SaveTable(skittles_agent1.S,'nim skittles1.json')
 SaveTable(skittles_agent2.S,'nim skittles2.json')
 
 
-# In[13]:
+# In[9]:
 
 
 get_ipython().run_line_magic('matplotlib', 'inline')
@@ -241,7 +253,7 @@ from matplotlib.pyplot import figure,plot,grid,legend,xlabel,ylabel,title
 from tqdm import tqdm
 
 
-# In[14]:
+# In[10]:
 
 
 agent1=skittles_agent1
@@ -251,17 +263,17 @@ agent2=skittles_agent2
 agent2.S=Table()
 
 
-# In[15]:
+# In[11]:
 
 
 S=Storage()
 one,two,ties,N=0,0,0,0
 
 
-# In[16]:
+# In[20]:
 
 
-for i in tqdm(range(30)):
+for i in tqdm(range(300)):
     g=Game(number_of_games=100)
     g.display=False
     
@@ -273,7 +285,7 @@ for i in tqdm(range(30)):
 y1,y2,y0,x=S.arrays()    
 
 
-# In[17]:
+# In[21]:
 
 
 figure(figsize=(16,8))
@@ -285,7 +297,7 @@ xlabel('Number of Games')
 ylabel('Percent')
 
 
-# In[19]:
+# In[22]:
 
 
 SaveTable(skittles_agent1.S,'nimplus skittles1.json')
@@ -294,14 +306,7 @@ SaveTable(skittles_agent2.S,'nimplus skittles2.json')
 
 # ## Test the agent
 
-# In[20]:
-
-
-g=Game()
-g.run(human_agent,skittles_agent2)
-
-
-# In[21]:
+# In[23]:
 
 
 g=Game(number_of_games=100)
@@ -310,7 +315,7 @@ result=g.run(minimax_agent,agent2)
 g.report()
 
 
-# In[22]:
+# In[24]:
 
 
 g=Game(number_of_games=100)
@@ -319,25 +324,28 @@ result=g.run(agent1,minimax_agent)
 g.report()
 
 
-# In[27]:
+# In[25]:
 
 
-g=Game()
-g.run(skittles_agent1,random_agent)
+g=Game(100,N=4)
+g.display=False
+result=g.run(skittles_agent1,random_agent)
+print([ ['tie','win','lose'][_] for _ in result])
+
+
+# In[26]:
+
+
+for i in range(20):
+    move=skittles_move(state=4,player=1,info=agent1)
+    print(move,end=" ")
+print()
 
 
 # In[28]:
 
 
-agent1.S
-
-
-# In[38]:
-
-
-for i in range(20):
-    move=skittles_move(state=4,player=1,info=agent1)
-    print(move)
+agent2.S
 
 
 # In[ ]:
