@@ -401,7 +401,7 @@ Q1_agent.Q
 
 # ## Minimax
 
-# In[16]:
+# In[31]:
 
 
 def minimax_move(state,player):
@@ -414,7 +414,7 @@ minimax_agent=Agent(minimax_move)
 
 # ## Training
 
-# In[17]:
+# In[32]:
 
 
 agent1=Q1_agent
@@ -423,21 +423,21 @@ agent2=Q2_agent
 agent2.Q=Table()
 
 
-# In[18]:
+# In[33]:
 
 
 S=Storage()
 one,two,ties,N=0,0,0,0
 
 
-# In[19]:
+# In[34]:
 
 
 N_test=100
 N_train=1
 
 
-# In[20]:
+# In[35]:
 
 
 num_training_games=0
@@ -462,13 +462,13 @@ for i in tqdm(range(200)):
 
 # ## Progress
 
-# In[21]:
+# In[36]:
 
 
 y1,y2,y0,x=S.arrays()
 
 
-# In[22]:
+# In[37]:
 
 
 get_ipython().run_line_magic('matplotlib', 'inline')
@@ -476,7 +476,7 @@ from matplotlib.pyplot import figure,plot,grid,legend,xlabel,ylabel,title
 from tqdm import tqdm
 
 
-# In[23]:
+# In[38]:
 
 
 figure(figsize=(16,8))
@@ -488,7 +488,7 @@ xlabel('Number of Games')
 ylabel('Percent')
 
 
-# In[24]:
+# In[39]:
 
 
 SaveTable(Q1_agent.Q,'Nim Q1 Table.json')
