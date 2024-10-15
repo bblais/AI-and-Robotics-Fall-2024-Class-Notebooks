@@ -286,7 +286,7 @@ N_train=100
 # In[11]:
 
 
-for i in tqdm(range(200)):
+for i in tqdm(range(2000)):
     Q1_agent.learning=True
     Q2_agent.learning=True
     g=Game(number_of_games=N_train)

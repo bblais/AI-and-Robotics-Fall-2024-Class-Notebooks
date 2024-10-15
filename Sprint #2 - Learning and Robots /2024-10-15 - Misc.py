@@ -28,6 +28,28 @@ except KeyboardInterrupt:  # wait for a control-C
 Shutdown()
 
 
+# In[ ]:
+
+
+left.power=100
+right.power=100
+
+while True:
+    value=bob.value
+    if value<10:
+        break
+
+    Wait(0.2)
+    print(value)
+
+
+print("stopping")
+left.power=0
+right.power=0
+
+
+
+
 # In[15]:
 
 

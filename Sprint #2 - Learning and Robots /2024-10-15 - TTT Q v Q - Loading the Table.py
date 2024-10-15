@@ -271,7 +271,7 @@ Q2_agent.γ=0.9  # memory constant -- how quickly does the table update back in 
 
 # ## Load the previous table
 
-# In[9]:
+# In[15]:
 
 
 Q1_agent.Q=LoadTable('2024-10-15 TTT Q1 Table.json')
@@ -280,14 +280,14 @@ Q2_agent.Q=LoadTable('2024-10-15 TTT Q2 Table.json')
 
 # ## Test
 
-# In[10]:
+# In[16]:
 
 
 Q1_agent.learning=False
 Q2_agent.learning=False
 
 
-# In[11]:
+# In[17]:
 
 
 g=Game(number_of_games=1000)
@@ -296,7 +296,7 @@ result=g.run(minimax_agent,Q2_agent)
 g.report()
 
 
-# In[13]:
+# In[18]:
 
 
 g=Game(number_of_games=1000)
@@ -305,7 +305,7 @@ result=g.run(random_agent,minimax_agent)
 g.report()
 
 
-# In[14]:
+# In[19]:
 
 
 g=Game(number_of_games=1000)
