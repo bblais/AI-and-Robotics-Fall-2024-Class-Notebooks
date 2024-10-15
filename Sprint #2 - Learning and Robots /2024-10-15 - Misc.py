@@ -50,7 +50,7 @@ right.power=0
 
 
 
-# In[15]:
+# In[ ]:
 
 
 left.power=100
@@ -68,8 +68,102 @@ left.power=0
 right.power=0
 
 
+# ## while loops
+
+# In[16]:
+
+
+value=0
+
+while value<10:
+    print(value)
+
+    value=value+1
+
+print(value)
+
+
+# In[18]:
+
+
+value=0
+
+while True:
+    print(value)
+
+    value=value+1
+    if value>=10:
+        break
+
+print(value)
+
+
+# In[19]:
+
+
+while True:
+
+    r,g,b,_=color_sensor.value
+
+    color=closest_color(r,g,b,
+        red=[255,0,0],
+        green=[0,255,0],
+        white=[255,255,255],
+                       )
+
+    if color=="red":
+        break
+
+    if color!="white":
+        break
+
+    if color in ["red","green"]:
+        break
+
+
+if color=="red":
+    # do something here
+    pass
+elif color=="green":
+    # do something else
+    pass
+else:
+    print("You can't get there from here.")
+    
+        
+
+
 # In[ ]:
 
 
+left.power=20
+right.power=20
 
+try:
+    while True:
+    
+        r,g,b,_=color_sensor.value
+    
+        color=closest_color(r,g,b,
+            red=[255,0,0],
+            green=[0,255,0],
+            white=[255,255,255],
+            gray=[55,55,55],
+            )
+    
+        if color=="red":
+            left.power=-20
+            right.power=-20
+    
+        if color=="green":
+            left.power=20
+            right.power=20
+
+
+
+except KeyboardInterrupt:  # control-C
+    print("Breaking out.")
+
+Shutdown()
+    
 
