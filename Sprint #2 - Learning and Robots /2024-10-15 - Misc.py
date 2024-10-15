@@ -17,10 +17,15 @@ bob,sally=Sensors(None,None,"us","touch")
 # In[13]:
 
 
-while True:
-    print("eyes",bob.value)
-    print("touch",sally.value)
-    Wait(0.1)
+try:
+    while True:
+        print("the value of eyes is:",bob.value)
+        print("the value of the touch sensor is:",sally.value)
+        Wait(0.1)
+except KeyboardInterrupt:  # wait for a control-C
+    pass
+
+Shutdown()
 
 
 # In[15]:
