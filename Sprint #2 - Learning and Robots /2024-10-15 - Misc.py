@@ -152,14 +152,16 @@ try:
             )
     
         if color=="red":
+            print("saw red")
             left.power=-20
             right.power=-20
     
         if color=="green":
+            print("saw green")
             left.power=20
             right.power=20
 
-
+        Wait(.1)
 
 except KeyboardInterrupt:  # control-C
     print("Breaking out.")
