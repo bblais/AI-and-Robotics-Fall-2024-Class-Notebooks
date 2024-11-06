@@ -2,7 +2,7 @@ from Game import *
 from Robot373 import *
 
 left,right=Motors("ab")
-
+color_sensor=Sensors("color",None,None,None)
 
 
 #=============GAME FUNCTIONS ===============
@@ -122,7 +122,7 @@ def show_state(state,player):
     print(state)
 
 
-#=============AGENT FUNCTIONS (not all of them) ===============
+#=============AGENT FUNCTIONS (only need random move) ===============
 
 def random_move(state,player):    
     moves=valid_moves(state,player)
@@ -218,7 +218,27 @@ def rot90():
     stop()
 
 
+# example from SOS TTT
+def make_move(state,player,move):
+    piece,location=move
+    if location==0:
+        rotate(-45)
+        go_forward()
+        stop()
+        Wait(0.2)
+    else:  # ....fill in
+        pass
 
+
+    if piece=='S':
+        tip_right()
+    else:
+        tip_left()
+
+
+        
+
+# example from breakthrough
 def make_move(state,player,move):
     start,end=move
     row,col=state.row(start),state.col(start)
@@ -251,7 +271,10 @@ def make_move(state,player,move):
 #======== MAIN CODE=========
 
 player=1 # or player=2 depending on which you want
-state=read_state() # read the pieces, and construct the state
+state=read_state("board.txt") # read the pieces, and construct the state
 move=get_move(state,player) # replace with minimax,skitles, Q, etc...
 make_move(state,player,move) # actually move the pieces
+
+
+Shutdown()
 
