@@ -195,16 +195,17 @@ from Game import Board
 state=Board('1233/4152/3244')
 
 
-# In[14]:
+# In[24]:
 
 
 squares=get_board_squares_from_image(im3,(3,4))
 
 
-# In[15]:
+# In[26]:
 
 
 nr,nc=(3,4)
+saveit=False
 
 count=0
 for r in range(nr):
@@ -225,17 +226,28 @@ for r in range(nr):
         gca().set_xticklabels([])
         gca().set_yticklabels([])
 
+
+        if saveit:
+            fname=f"images/square{r}_{c}_{piece}.jpg"
+            print(fname)
+            imsave(fname,squares[count])
+        
+
+
+
+        
         count+=1        
 
 
 
 # what would happen if we didn't straighten and only truncated?
 
-# In[20]:
+# In[27]:
 
 
 squares=get_board_squares_from_image(im2,(3,4))
 nr,nc=(3,4)
+saveit=False
 
 count=0
 for r in range(nr):
@@ -256,8 +268,24 @@ for r in range(nr):
         gca().set_xticklabels([])
         gca().set_yticklabels([])
 
+
+        if saveit:
+            fname=f"images/square{r}_{c}_{piece}.jpg"
+            print(fname)
+            imsave(fname,squares[count])
+        
+
+
+
+        
         count+=1        
 
+
+
+# In[21]:
+
+
+import os,shutil,glob
 
 
 # In[ ]:
