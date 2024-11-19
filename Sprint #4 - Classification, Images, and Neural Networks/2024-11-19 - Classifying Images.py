@@ -14,7 +14,7 @@ from pylab import *
 from classy import *
 
 
-# In[6]:
+# In[3]:
 
 
 ls "images/training squares"
@@ -22,7 +22,7 @@ ls "images/training squares"
 
 # ## Do these numbers make sense?
 
-# In[7]:
+# In[4]:
 
 
 images=image.load_images('images/training squares/')
@@ -30,15 +30,21 @@ images=remap_targets(images,new_target_names=['blank','player1','player2'])
 summary(images)
 
 
-# In[8]:
+# In[5]:
 
 
 images['data'][0].shape
 
 
+# In[6]:
+
+
+imshow(images['data'][0])
+
+
 # ## Do these numbers make sense?
 
-# In[9]:
+# In[7]:
 
 
 data=image.images_to_vectors(images)
@@ -46,13 +52,13 @@ data=image.images_to_vectors(images)
 
 # # Classification
 
-# In[10]:
+# In[8]:
 
 
 data_train,data_test=split(data,test_size=0.2)
 
 
-# In[11]:
+# In[9]:
 
 
 C=NaiveBayes()
@@ -61,7 +67,7 @@ print("On Training Set:",C.percent_correct(data_train.vectors,data_train.targets
 print("On Test Set:",C.percent_correct(data_test.vectors,data_test.targets))
 
 
-# In[12]:
+# In[10]:
 
 
 C.means

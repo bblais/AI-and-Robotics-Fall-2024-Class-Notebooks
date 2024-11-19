@@ -29,13 +29,13 @@ data.targets
 
 # ## Do these shapes make sense?
 
-# In[6]:
+# In[5]:
 
 
 summary(data)
 
 
-# In[7]:
+# In[6]:
 
 
 data_train,data_test=split(data,0.2)
@@ -43,24 +43,23 @@ data_train,data_test=split(data,0.2)
 
 # ## Go to 2D for visualization
 
-# In[29]:
+# In[7]:
 
 
 subset=extract_features(data,[0,1])
 
 
-# In[30]:
+# In[8]:
 
 
 plot2D(subset)
 
 
-# In[38]:
+# In[9]:
 
 
 C=NaiveBayes()
 C.fit(subset.vectors,subset.targets)
-subset.vectors
 
 
 # In[39]:
@@ -69,25 +68,25 @@ subset.vectors
 subset.targets
 
 
-# In[40]:
+# In[10]:
 
 
 subset.vectors[subset.targets==0]
 
 
-# In[41]:
+# In[11]:
 
 
 subset.vectors[subset.targets==0].mean(axis=0)
 
 
-# In[32]:
+# In[12]:
 
 
 C.means
 
 
-# In[43]:
+# In[13]:
 
 
 plot2D(subset,C)
@@ -95,7 +94,7 @@ C.plot_centers()
 title("Naive Bayes")
 
 
-# In[50]:
+# In[14]:
 
 
 figure(figsize=(20,8))
@@ -116,7 +115,7 @@ plot2D(subset,C)
 title(f"kNearestNeighbor k={k}")
 
 
-# In[20]:
+# In[15]:
 
 
 subset=extract_features(data,[2,3])
@@ -128,13 +127,13 @@ C.plot_centers()
 
 # ## Back to the 4D data
 
-# In[21]:
+# In[16]:
 
 
 data_train,data_test=split(data,0.2)
 
 
-# In[22]:
+# In[17]:
 
 
 C=NaiveBayes()
@@ -144,13 +143,13 @@ print("On the training data: ",C.percent_correct(data_train.vectors,data_train.t
 print("On the test data: ",C.percent_correct(data_test.vectors,data_test.targets))
 
 
-# In[23]:
+# In[18]:
 
 
 C.means
 
 
-# In[24]:
+# In[19]:
 
 
 C=kNearestNeighbor(k=5)
@@ -160,7 +159,7 @@ print("On the training data: ",C.percent_correct(data_train.vectors,data_train.t
 print("On the test data: ",C.percent_correct(data_test.vectors,data_test.targets))
 
 
-# In[25]:
+# In[21]:
 
 
 C=CSC()
@@ -170,19 +169,19 @@ print("On the training data: ",C.percent_correct(data_train.vectors,data_train.t
 print("On the test data: ",C.percent_correct(data_test.vectors,data_test.targets))
 
 
-# In[26]:
+# In[22]:
 
 
 C.centers
 
 
-# In[27]:
+# In[23]:
 
 
 C.radii
 
 
-# In[28]:
+# In[24]:
 
 
 C.targets
