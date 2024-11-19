@@ -48,7 +48,8 @@ pip install "git+https://github.com/bblais/Robot373" --upgrade
 
 # ## Sprint #3
 
-# (Windows only) Install Putty for pscp:  https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html
+# - Windows comes with ssh
+# - install Cyberduck for file transfer: https://cyberduck.io/
 
 # ## Sprint #4
 
@@ -75,6 +76,8 @@ get_ipython().system('pip install "git+https://github.com/bblais/NumpyNet" --upg
 
 get_ipython().system('pip install tqdm')
 
+
+# this one is for cv2
 
 # In[ ]:
 
