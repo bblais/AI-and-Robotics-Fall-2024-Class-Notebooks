@@ -12,9 +12,10 @@ from image_defs import *
 
 # ## Get the image slicing to work with one image
 # 
-# You need a thresholded (black and white) 
+# - You need a thresholded (black and white)
+# - you may need to truncate the image to omit stuff outside the board
 
-# In[39]:
+# In[53]:
 
 
 training_boards_folder='images/2024-11-21 - training board images'
@@ -22,7 +23,22 @@ image=imread(f"{training_boards_folder}/test0.jpg")
 imshow(image)
 
 
-# In[40]:
+# if you need to truncate, do it here (I don't really, but I can truncate a bit)
+
+# In[54]:
+
+
+image=image[30:260,20:340]
+imshow(image)
+
+
+# In[ ]:
+
+
+
+
+
+# In[55]:
 
 
 gray,black_and_white=get_gray_and_threshold_image(image,threshold=90)
@@ -38,13 +54,13 @@ colorbar()
 
 
 
-# In[41]:
+# In[56]:
 
 
 corners=find_corners(black_and_white,plotit=True)
 
 
-# In[42]:
+# In[57]:
 
 
 im3=straighten_image(image,corners)
@@ -57,7 +73,7 @@ subplot(1,2,2)
 imshow(im3)
 
 
-# In[43]:
+# In[58]:
 
 
 from Game import Board
@@ -66,13 +82,13 @@ print(state)
 squares=get_board_squares_from_image(im3,state.shape)
 
 
-# In[44]:
+# In[59]:
 
 
 import os
 
 
-# In[45]:
+# In[60]:
 
 
 training_squares_folder='images/2024-11-21 - training squares'
@@ -120,7 +136,7 @@ for r in range(nr):
 
 
 
-# In[ ]:
+# In[61]:
 
 
 training_squares_folder='images/2024-11-21 - training squares'
@@ -200,26 +216,26 @@ for r in range(nr):
 
 # ## Now we want to loop through boards
 
-# In[12]:
+# In[62]:
 
 
 from glob import glob
 
 
-# In[14]:
+# In[63]:
 
 
 glob(training_boards_folder+"/*.jpg")
 
 
-# In[16]:
+# In[64]:
 
 
 board_filenames=glob(training_boards_folder+"/*.jpg")
 print(len(board_filenames))
 
 
-# In[22]:
+# In[68]:
 
 
 count=1
@@ -228,6 +244,8 @@ for filename in board_filenames:
     image=imread(filename)
     imshow(image)
 
+    image=image[30:260,20:340]  # truncate if you need to
+    
     base,name=os.path.split(filename)
     title(name)
     count+=1
@@ -235,13 +253,13 @@ for filename in board_filenames:
 
 # Put in the Game board definitions
 
-# In[24]:
+# In[66]:
 
 
 from Game import *
 
 
-# In[23]:
+# In[67]:
 
 
 game_boards=[
@@ -258,7 +276,7 @@ game_boards=[
 ]
 
 
-# In[50]:
+# In[69]:
 
 
 count=0
@@ -266,6 +284,10 @@ for filename,board_string in zip(board_filenames,game_boards):
     state=Board(board_string)
     print(filename,board_string)
     image=imread(filename)
+
+    image=image[30:260,20:340]  # truncate if you need to
+
+    
     gray,black_and_white=get_gray_and_threshold_image(image,threshold=90)
     corners=find_corners(black_and_white,plotit=False)
     im3=straighten_image(image,corners)
@@ -322,7 +344,7 @@ for filename,board_string in zip(board_filenames,game_boards):
 
 # ## if you want just the middle of the square, you can truncate it like....
 
-# In[52]:
+# In[70]:
 
 
 count=0
@@ -330,6 +352,9 @@ for filename,board_string in zip(board_filenames,game_boards):
     state=Board(board_string)
     print(filename,board_string)
     image=imread(filename)
+
+    image=image[30:260,20:340]  # truncate if you need to
+
     gray,black_and_white=get_gray_and_threshold_image(image,threshold=90)
     corners=find_corners(black_and_white,plotit=False)
     im3=straighten_image(image,corners)
