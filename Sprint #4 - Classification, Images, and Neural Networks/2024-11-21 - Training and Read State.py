@@ -120,6 +120,84 @@ for r in range(nr):
 
 
 
+# In[ ]:
+
+
+training_squares_folder='images/2024-11-21 - training squares'
+
+if not os.path.exists(training_squares_folder):
+    print(f"Making folder {training_squares_folder}")
+    os.mkdir(training_squares_folder)
+
+
+nr,nc=state.shape
+saveit=True
+
+count=0
+for r in range(nr):
+    for c in range(nc):
+
+        subplot(nr,nc,count+1)
+        imshow(squares[count])
+
+        shape=squares[count].shape
+        piece=state.board[count]
+        
+        title(f"Piece {piece}")
+        if c==0:
+            ylabel(shape[0])
+
+        if r==nr-1:
+            xlabel(shape[1])
+        gca().set_xticklabels([])
+        gca().set_yticklabels([])
+
+
+        if saveit:
+            piece_folder=f"{training_squares_folder}/piece_{piece}"
+            if not os.path.exists(piece_folder):
+                print(f"Making folder {piece_folder}")
+                os.mkdir(piece_folder)
+            
+            fname=f"{piece_folder}/square{count}_{piece}.jpg"
+            print(fname)
+            imsave(fname,squares[count])
+        
+        
+        count+=1        
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
 # ## Now we want to loop through boards
 
 # In[12]:
@@ -180,9 +258,10 @@ game_boards=[
 ]
 
 
-# In[46]:
+# In[49]:
 
 
+count=0
 for filename,board_string in zip(board_filenames,game_boards):
     state=Board(board_string)
     print(filename,board_string)
@@ -204,15 +283,15 @@ for filename,board_string in zip(board_filenames,game_boards):
     saveit=True
 
     figure()
-    count=0
+    plot_count=0
     for r in range(nr):
         for c in range(nc):
     
-            subplot(nr,nc,count+1)
-            imshow(squares[count])
+            subplot(nr,nc,plot_count+1)
+            imshow(squares[plot_count])
     
-            shape=squares[count].shape
-            piece=state.board[count]
+            shape=squares[plot_count].shape
+            piece=state.board[plot_count]
             
             title(f"Piece {piece}")
             if c==0:
@@ -232,10 +311,11 @@ for filename,board_string in zip(board_filenames,game_boards):
                 
                 fname=f"{piece_folder}/square{count}_{piece}.jpg"
                 print(fname)
-                imsave(fname,squares[count])
+                imsave(fname,squares[plot_count])
             
             
-            count+=1        
+            plot_count+=1  
+            count+=1
         
 
 
