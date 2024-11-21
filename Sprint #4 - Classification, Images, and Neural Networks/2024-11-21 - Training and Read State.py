@@ -10,11 +10,11 @@ import cv2
 from image_defs import *
 
 
-# ## Get the training to work with one image
+# ## Get the image slicing to work with one image
 # 
 # You need a thresholded (black and white) 
 
-# In[13]:
+# In[39]:
 
 
 training_boards_folder='images/2024-11-21 - training board images'
@@ -22,7 +22,7 @@ image=imread(f"{training_boards_folder}/test0.jpg")
 imshow(image)
 
 
-# In[3]:
+# In[40]:
 
 
 gray,black_and_white=get_gray_and_threshold_image(image,threshold=90)
@@ -38,13 +38,13 @@ colorbar()
 
 
 
-# In[4]:
+# In[41]:
 
 
 corners=find_corners(black_and_white,plotit=True)
 
 
-# In[5]:
+# In[42]:
 
 
 im3=straighten_image(image,corners)
@@ -57,7 +57,7 @@ subplot(1,2,2)
 imshow(im3)
 
 
-# In[6]:
+# In[43]:
 
 
 from Game import Board
@@ -66,13 +66,13 @@ print(state)
 squares=get_board_squares_from_image(im3,state.shape)
 
 
-# In[7]:
+# In[44]:
 
 
 import os
 
 
-# In[11]:
+# In[45]:
 
 
 training_squares_folder='images/2024-11-21 - training squares'
@@ -180,7 +180,7 @@ game_boards=[
 ]
 
 
-# In[26]:
+# In[46]:
 
 
 for filename,board_string in zip(board_filenames,game_boards):
