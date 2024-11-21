@@ -114,7 +114,6 @@ def find_corners(threshold_image,plotit=False):
 
 
     if plotit:
-        figure()
         imshow(threshold_image)
         plot(xp,yp,'.')
         plot(x,y,'o-')
