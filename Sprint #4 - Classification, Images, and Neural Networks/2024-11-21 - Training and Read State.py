@@ -15,7 +15,7 @@ from image_defs import *
 # - You need a thresholded (black and white)
 # - you may need to truncate the image to omit stuff outside the board
 
-# In[53]:
+# In[72]:
 
 
 training_boards_folder='images/2024-11-21 - training board images'
@@ -25,10 +25,10 @@ imshow(image)
 
 # if you need to truncate, do it here (I don't really, but I can truncate a bit)
 
-# In[54]:
+# In[73]:
 
 
-image=image[30:260,20:340]
+image=image[30:260,20:340,:]
 imshow(image)
 
 
@@ -285,7 +285,7 @@ for filename,board_string in zip(board_filenames,game_boards):
     print(filename,board_string)
     image=imread(filename)
 
-    image=image[30:260,20:340]  # truncate if you need to
+    image=image[30:260,20:340,:]  # truncate if you need to
 
     
     gray,black_and_white=get_gray_and_threshold_image(image,threshold=90)
@@ -353,7 +353,7 @@ for filename,board_string in zip(board_filenames,game_boards):
     print(filename,board_string)
     image=imread(filename)
 
-    image=image[30:260,20:340]  # truncate if you need to
+    image=image[30:260,20:340,:]  # truncate if you need to
 
     gray,black_and_white=get_gray_and_threshold_image(image,threshold=90)
     corners=find_corners(black_and_white,plotit=False)
