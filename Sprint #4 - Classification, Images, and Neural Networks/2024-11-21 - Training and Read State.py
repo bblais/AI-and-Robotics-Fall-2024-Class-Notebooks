@@ -342,7 +342,7 @@ for filename,board_string in zip(board_filenames,game_boards):
 
 
 
-# ## if you want just the middle of the square, you can truncate it like....
+# ## if you want just the middle of the square, you can truncate the squares like ....
 
 # In[70]:
 
