@@ -258,7 +258,7 @@ game_boards=[
 ]
 
 
-# In[49]:
+# In[50]:
 
 
 count=0
@@ -270,6 +270,134 @@ for filename,board_string in zip(board_filenames,game_boards):
     corners=find_corners(black_and_white,plotit=False)
     im3=straighten_image(image,corners)
     squares=get_board_squares_from_image(im3,state.shape)
+
+
+    training_squares_folder='images/2024-11-21 - training squares'
+    
+    if not os.path.exists(training_squares_folder):
+        print(f"Making folder {training_squares_folder}")
+        os.mkdir(training_squares_folder)
+    
+    
+    nr,nc=state.shape
+    saveit=True
+
+    figure()
+    plot_count=0
+    for r in range(nr):
+        for c in range(nc):
+    
+            subplot(nr,nc,plot_count+1)
+            imshow(squares[plot_count])
+    
+            shape=squares[plot_count].shape
+            piece=state.board[plot_count]
+            
+            title(f"Piece {piece}")
+            if c==0:
+                ylabel(shape[0])
+    
+            if r==nr-1:
+                xlabel(shape[1])
+            gca().set_xticklabels([])
+            gca().set_yticklabels([])
+    
+    
+            if saveit:
+                piece_folder=f"{training_squares_folder}/piece_{piece}"
+                if not os.path.exists(piece_folder):
+                    print(f"Making folder {piece_folder}")
+                    os.mkdir(piece_folder)
+                
+                fname=f"{piece_folder}/square{count}_{piece}.jpg"
+                print(fname)
+                imsave(fname,squares[plot_count])
+            
+            
+            plot_count+=1  
+            count+=1
+
+
+
+
+# ## You can save flipped/rotated versions like...
+
+# In[51]:
+
+
+count=0
+for filename,board_string in zip(board_filenames,game_boards):
+    state=Board(board_string)
+    print(filename,board_string)
+    image=imread(filename)
+    gray,black_and_white=get_gray_and_threshold_image(image,threshold=90)
+    corners=find_corners(black_and_white,plotit=False)
+    im3=straighten_image(image,corners)
+    squares=get_board_squares_from_image(im3,state.shape)
+
+
+    training_squares_folder='images/2024-11-21 - training squares'
+    
+    if not os.path.exists(training_squares_folder):
+        print(f"Making folder {training_squares_folder}")
+        os.mkdir(training_squares_folder)
+    
+    
+    nr,nc=state.shape
+    saveit=True
+
+    figure()
+    plot_count=0
+    for r in range(nr):
+        for c in range(nc):
+    
+            subplot(nr,nc,plot_count+1)
+            imshow(squares[plot_count])
+    
+            shape=squares[plot_count].shape
+            piece=state.board[plot_count]
+            
+            title(f"Piece {piece}")
+            if c==0:
+                ylabel(shape[0])
+    
+            if r==nr-1:
+                xlabel(shape[1])
+            gca().set_xticklabels([])
+            gca().set_yticklabels([])
+    
+    
+            if saveit:
+                piece_folder=f"{training_squares_folder}/piece_{piece}"
+                if not os.path.exists(piece_folder):
+                    print(f"Making folder {piece_folder}")
+                    os.mkdir(piece_folder)
+                
+                fname=f"{piece_folder}/square{count}_{piece}.jpg"
+                print(fname)
+                imsave(fname,squares[plot_count])
+            
+            
+            plot_count+=1  
+            count+=1
+
+
+
+
+
+## flipped 
+for filename,board_string in zip(board_filenames,game_boards):
+    state=Board(board_string)
+    print(filename,board_string)
+    image=imread(filename)
+    gray,black_and_white=get_gray_and_threshold_image(image,threshold=90)
+    corners=find_corners(black_and_white,plotit=False)
+    im3=straighten_image(image,corners)
+    squares=get_board_squares_from_image(im3,state.shape)
+
+
+    ## flipped 
+    squares=[np.fliplr(sq) for sq in squares]
 
 
     training_squares_folder='images/2024-11-21 - training squares'
