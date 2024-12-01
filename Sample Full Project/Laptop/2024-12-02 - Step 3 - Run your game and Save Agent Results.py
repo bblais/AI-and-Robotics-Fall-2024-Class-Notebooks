@@ -22,17 +22,21 @@ def random_move(state,player):
 random_agent=Agent(random_move)
 
 def human_move(state,player):
-    print("Player ", player)
-    valid_move=False
-    while not valid_move:
-        move=int(input('What is your move? '))
+    print("Locations:")
+    state.show_locations()
+    print("Valid Moves:")
+    print(valid_moves(state,player))
+    
+    while True:
+        move=eval(input("Enter your move"))
 
-        if move in valid_moves(state,player):
-            valid_move=True
+        if move not in valid_moves(state,player):
+            print("That is not a valid move")
         else:
-            print("Illegal move.")
-
+            break
+    
     return move
+
 human_agent=Agent(human_move)
 
 
@@ -46,6 +50,9 @@ def Q_move(state,player,info):
     last_state=info.last_state
     last_action=info.last_action
     learning=info.learning
+
+    if state in info.states:
+        raise ValueError(str(state))
     
     α=info.α  # learning rate
     ϵ=info.ϵ  # how often to take a random move
@@ -75,8 +82,7 @@ def Q_move(state,player,info):
         # learn
         if learning:
             Q[last_state][last_action]+=α*(reward +
-                        γ*max([Q[state][a] for a in Q[state]]) - Q[last_state][last_action])
-    
+                        γ*max([Q[state][a] for a in Q[state]]) - Q[last_state][last_action])        
     return move
 
 
@@ -120,8 +126,8 @@ Q1_agent.post=Q_after
 Q1_agent.Q=Table()  # makes an empty table
 Q1_agent.learning=True
 
-Q1_agent.α=0.4  # learning rate
-Q1_agent.ϵ=0.5  # how often to take a random move
+Q1_agent.α=0.2  # learning rate
+Q1_agent.ϵ=0.3  # how often to take a random move
 Q1_agent.γ=0.9  # memory constant -- how quickly does the table update back in time (earlier in the game)
 
 
@@ -133,8 +139,8 @@ Q2_agent.post=Q_after
 Q2_agent.Q=Table()  # makes an empty table
 Q2_agent.learning=True
 
-Q2_agent.α=0.4  # learning rate
-Q2_agent.ϵ=0.5  # how often to take a random move
+Q2_agent.α=0.2  # learning rate
+Q2_agent.ϵ=0.3  # how often to take a random move
 Q2_agent.γ=0.9  # memory constant -- how quickly does the table update back in time (earlier in the game)
 
 
@@ -144,33 +150,35 @@ Q2_agent.γ=0.9  # memory constant -- how quickly does the table update back in 
 
 
 agent1=Q1_agent
-agent1.Q=Table()
+agent1.Q=LoadTable("Q1_breakthrough_table.json")
 agent2=Q2_agent
-agent2.Q=Table()
+agent2.Q=LoadTable("Q2_breakthrough_table.json")
 
 
 # In[8]:
 
 
 S=Storage()
-one,two,ties,N=0,0,0,0
+one,two,ties,total_test,total_train=0,0,0,0,0
 
 
 # In[9]:
 
 
 N_test=100
-N_train=100
+N_train=1000
 
 
 # In[10]:
 
 
-for i in tqdm(range(2000)):
+for i in tqdm(range(200)):
     Q1_agent.learning=True
     Q2_agent.learning=True
     g=Game(number_of_games=N_train)
     g.display=False
+    g.check_repeated_states=True
+    g.max_move_count=20
     result=g.run(agent1,agent2)
 
     
@@ -178,10 +186,12 @@ for i in tqdm(range(2000)):
     Q2_agent.learning=False
     g=Game(number_of_games=N_test)
     g.display=False
+    g.check_repeated_states=True
+    g.max_move_count=20
     result=g.run(agent1,agent2)
-    one,two,ties,N=one+result.count(1),two+result.count(2),ties+result.count(0),N+len(result)
+    one,two,ties,total_test,total_train=one+result.count(1),two+result.count(2),ties+result.count(0),total_test+N_test,total_train+N_train
     
-    S+=one/N*100,two/N*100,ties/N*100,N
+    S+=one/total_test*100,two/total_test*100,ties/total_test*100,total_test,total_train
 
 
 # ## Progress
@@ -189,7 +199,7 @@ for i in tqdm(range(2000)):
 # In[11]:
 
 
-y1,y2,y0,x=S.arrays()
+y1,y2,y0,x1,x=S.arrays()
 
 
 # In[12]:
@@ -216,6 +226,20 @@ ylabel('Percent')
 
 SaveTable(Q1_agent.Q,"Q1_breakthrough_table.json")
 SaveTable(Q2_agent.Q,"Q2_breakthrough_table.json")
+
+
+# In[15]:
+
+
+# g=Game()
+# g.run(Q1_agent,human_agent)
+
+
+# In[16]:
+
+
+# g=Game()
+# g.run(human_agent,Q2_agent)
 
 
 # In[ ]:

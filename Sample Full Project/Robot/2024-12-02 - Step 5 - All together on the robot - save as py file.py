@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[10]:
 
 
 from breakthrough import *
@@ -11,7 +11,7 @@ from pylab import imread,imsave,imshow
 from image_defs import *
 
 
-# In[2]:
+# In[11]:
 
 
 if BP is None:
@@ -25,7 +25,7 @@ else:
 
 # ## Agent
 
-# In[3]:
+# In[2]:
 
 
 def get_move(state,player):
@@ -43,7 +43,7 @@ def get_move(state,player):
 
 # ## Make Move
 
-# In[4]:
+# In[3]:
 
 
 def make_move(move):
@@ -118,7 +118,7 @@ def make_move(move):
 
 # ## Read State
 
-# In[5]:
+# In[4]:
 
 
 def read_state_from_file(filename):
@@ -135,7 +135,7 @@ def read_state_from_file(filename):
     return state
 
 
-# In[6]:
+# In[5]:
 
 
 def read_state():
@@ -208,7 +208,7 @@ def read_state():
     return state
 
 
-# In[7]:
+# In[6]:
 
 
 classifier=NaiveBayes()
@@ -217,7 +217,7 @@ classifier.load('naive_bayes_trained.json')
 
 # on the laptop, look at the image to see if the state is correct.  remove this imread and imshow on the robot
 
-# In[8]:
+# In[12]:
 
 
 if on_laptop:
@@ -225,7 +225,7 @@ if on_laptop:
     imshow(image)
 
 
-# In[9]:
+# In[15]:
 
 
 if on_laptop:
@@ -234,7 +234,7 @@ if on_laptop:
 
 # ## Now the entire project
 
-# In[10]:
+# In[9]:
 
 
 state=read_state()     #  read the state from the world
