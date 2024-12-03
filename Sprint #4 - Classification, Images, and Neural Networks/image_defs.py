@@ -33,6 +33,7 @@ def straighten_image(image,corners=None):
 
     # Compute the perspective transform matrix
     matrix = cv2.getPerspectiveTransform(corners, destination_corners)
+    print(matrix)
     
     # Apply the perspective transformation
     warped_image = cv2.warpPerspective(image, matrix, (width, height))
@@ -45,7 +46,6 @@ def straighten_image(image,corners=None):
 
 def get_board_squares_from_image(image,board_size,square_size=(60,60)):
     import numpy as np
-    import cv2
     nr,nc=board_size
     
     squares=[]
@@ -66,6 +66,43 @@ def get_board_squares_from_image(image,board_size,square_size=(60,60)):
 
 
 # In[4]:
+
+
+# def to_grayscale(image):
+#     """
+#     Convert an image to grayscale using only numpy.
+
+#     Parameters:
+#         image (np.ndarray): Input image as a NumPy array.
+
+#     Returns:
+#         np.ndarray: Grayscale image as a 2D NumPy array.
+#     """
+#     # Check if the image is RGB
+#     if image.ndim == 3:  # RGB image
+#         # Apply the grayscale conversion formula
+#         grayscale = np.dot(image[..., :3], [0.2989, 0.5870, 0.1140])
+#     else:  # Image is already grayscale
+#         grayscale = image
+
+#     return grayscale
+
+# def get_gray_and_threshold_image(image,threshold,relationship="<"):
+#     import numpy as np
+    
+
+#     gray = to_grayscale(image)
+#     h, w = image.shape[:2]
+
+#     if relationship=="<":
+#         threshold_im=((gray<threshold)*255).astype(np.uint8)
+#     elif  relationship==">":
+#         threshold_im=((gray<threshold)*255).astype(np.uint8)
+#     else:
+#         raise NotImplementedError
+
+#     return gray,threshold_im
+
 
 
 def get_gray_and_threshold_image(image,threshold,fill_sides=True):
@@ -92,6 +129,48 @@ def get_gray_and_threshold_image(image,threshold,fill_sides=True):
 
 
 def find_corners(threshold_image,plotit=False):
+    import numpy as np
+    from pylab import figure,imshow,plot
+    
+    idx=np.where(threshold_image>126)
+    points=[]
+    for (i,j) in zip(idx[0],idx[1]):
+        points.append((j,i))
+    
+    points=np.array(points)
+    xp=points[:,0]
+    yp=points[:,1]
+    
+    import scipy.spatial
+    hull = scipy.spatial.ConvexHull(points)
+    hull_points = points[hull.vertices]
+
+    x=hull_points[:,0]
+    y=hull_points[:,1]
+
+
+    if plotit:
+        imshow(threshold_image)
+        plot(xp,yp,'.')
+        plot(x,y,'o-')
+
+    
+    h,w=threshold_image.shape
+    corners=[]    
+    for x2,y2 in [ [w,h], [0,h],[0,0],[w,0]  ]:
+        d=(x-x2)**2+(y-y2)**2
+        idx=np.argmax(d)
+    
+        corners.append([x[idx],y[idx]])
+    corners=np.array(corners,dtype=np.float32)
+    
+    if plotit:
+        plot(corners[:,0],corners[:,1],'*')
+
+    return corners
+
+
+def find_corners_old(threshold_image,plotit=False):
     import numpy as np
     from pylab import figure,imshow,plot
     import cv2

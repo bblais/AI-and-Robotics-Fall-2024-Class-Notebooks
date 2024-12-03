@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[9]:
+# In[2]:
 
 
 get_ipython().run_line_magic('matplotlib', 'inline')
@@ -14,22 +14,22 @@ import os
 
 # Go back to 2024-11-21 Make Training Squares for every step here.
 
-# In[10]:
+# In[3]:
 
 
 training_boards_folder='images/2024-11-21 - training board images'
 
 
-# In[11]:
+# In[4]:
 
 
-board_filenames=glob(training_boards_folder+"/*.jpg")
+board_filenames=sorted(glob(training_boards_folder+"/*.jpg"))
 print(len(board_filenames))
 
 
 # ## Look at all the boards
 
-# In[12]:
+# In[5]:
 
 
 count=1

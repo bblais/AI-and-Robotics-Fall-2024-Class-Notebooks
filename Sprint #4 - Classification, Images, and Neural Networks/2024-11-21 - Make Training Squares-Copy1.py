@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[2]:
 
 
 get_ipython().run_line_magic('matplotlib', 'inline')
@@ -15,7 +15,7 @@ from image_defs import *
 # - You need a thresholded (black and white)
 # - you may need to truncate the image to omit stuff outside the board
 
-# In[72]:
+# In[3]:
 
 
 training_boards_folder='images/2024-11-21 - training board images'
@@ -25,7 +25,7 @@ imshow(image)
 
 # if you need to truncate, do it here (I don't really, but I can truncate a bit)
 
-# In[73]:
+# In[4]:
 
 
 image=image[30:260,20:340,:]
@@ -38,7 +38,7 @@ imshow(image)
 
 
 
-# In[55]:
+# In[5]:
 
 
 gray,black_and_white=get_gray_and_threshold_image(image,threshold=90)
@@ -54,13 +54,13 @@ colorbar()
 
 
 
-# In[56]:
+# In[6]:
 
 
 corners=find_corners(black_and_white,plotit=True)
 
 
-# In[57]:
+# In[7]:
 
 
 im3=straighten_image(image,corners)
@@ -73,7 +73,7 @@ subplot(1,2,2)
 imshow(im3)
 
 
-# In[58]:
+# In[8]:
 
 
 from Game import Board
@@ -82,7 +82,7 @@ print(state)
 squares=get_board_squares_from_image(im3,state.shape)
 
 
-# In[59]:
+# In[9]:
 
 
 import os
@@ -216,16 +216,35 @@ for r in range(nr):
 
 # ## Now we want to loop through boards
 
-# In[62]:
+# In[11]:
 
 
 from glob import glob
+import os
+training_boards_folder='images/2024-11-21 - training board images'
 
 
-# In[63]:
+# In[12]:
 
 
 glob(training_boards_folder+"/*.jpg")
+
+
+# In[13]:
+
+
+{os.path.split(k)[1]:v for k,v in zip(glob(training_boards_folder+"/*.jpg"),[
+    '0000/0000/0000/0000',
+    '1111/1111/1111/1111',
+    '1111/1111/1111/1111',
+    '1111/1111/1111/1111',
+    '0000/0000/0000/0000',
+    '2222/2222/2222/2222',
+    '2222/2222/2222/2222',
+    '0202/2020/0202/0202',
+    '2222/2222/2222/2222',
+    '1101/1011/0000/1111',
+])}
 
 
 # In[64]:
