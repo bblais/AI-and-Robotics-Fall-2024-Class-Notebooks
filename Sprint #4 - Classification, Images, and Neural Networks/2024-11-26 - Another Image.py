@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[2]:
+# In[1]:
 
 
 get_ipython().run_line_magic('matplotlib', 'inline')
@@ -15,7 +15,7 @@ from image_defs import *
 # - You need a thresholded (black and white)
 # - you may need to truncate the image to omit stuff outside the board
 
-# In[3]:
+# In[2]:
 
 
 training_boards_folder='images/plain2_squares'
@@ -25,7 +25,7 @@ imshow(image)
 
 # if you need to truncate, do it here (I don't really, but I can truncate a bit)
 
-# In[4]:
+# In[3]:
 
 
 image=image[:,200:1450,:]
@@ -38,7 +38,7 @@ imshow(image)
 
 
 
-# In[6]:
+# In[4]:
 
 
 threshold=200
@@ -57,10 +57,11 @@ colorbar()
 
 
 
-# In[7]:
+# In[5]:
 
 
 corners=find_corners(black_and_white,plotit=True)
+corners
 
 
 # In[8]:
