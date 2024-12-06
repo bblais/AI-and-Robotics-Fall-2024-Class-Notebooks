@@ -1,17 +1,17 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[10]:
+# In[1]:
 
 
 from breakthrough import *
 from my_robot_functions import *  
 from classy import *
-from pylab import imread,imsave,imshow
+from pylab import imread,imsave,imshow,float32,figure
 from image_defs import *
 
 
-# In[11]:
+# In[2]:
 
 
 if BP is None:
@@ -25,7 +25,7 @@ else:
 
 # ## Agent
 
-# In[2]:
+# In[3]:
 
 
 def get_move(state,player):
@@ -43,7 +43,7 @@ def get_move(state,player):
 
 # ## Make Move
 
-# In[3]:
+# In[4]:
 
 
 def make_move(move):
@@ -118,7 +118,7 @@ def make_move(move):
 
 # ## Read State
 
-# In[4]:
+# In[5]:
 
 
 def read_state_from_file(filename):
@@ -135,7 +135,7 @@ def read_state_from_file(filename):
     return state
 
 
-# In[5]:
+# In[6]:
 
 
 def read_state():
@@ -148,8 +148,8 @@ def read_state():
 
     
     # load the classifier
-    classifier=NaiveBayes()
-    classifier.load('naive_bayes_trained.json')
+    classifier=CSC()
+    classifier.load('CSC_trained.json')
     
     
     # get the picture
@@ -160,12 +160,16 @@ def read_state():
     # this part comes from your Make Training Squares script
     image=imread(filename)
 
-    # these 5 lines are specific to your image
-    image=image[30:260,20:340,:]  # truncate if you need to
-    gray,black_and_white=get_gray_and_threshold_image(image,threshold=90)
-    corners=find_corners(black_and_white,plotit=False)
+    # these few lines are specific to your image
+    corners= array([[ 64.,  33.],      # <=== check this
+       [295.,  31.],
+       [313., 255.],
+       [ 44., 256.]], dtype=float32) 
+    
     im3=straighten_image(image,corners)
-    squares=get_board_squares_from_image(im3,state.shape)
+    squares=get_board_squares_from_image(im3,
+                                     state.shape,
+                                     middle_pixels=20)  # <=== check this
 
     # for debugging
     if not os.path.exists('predicted'):
@@ -173,6 +177,7 @@ def read_state():
 
     count=0
     values=[]
+    
     for r in range(nr):
         for c in range(nc):
             # convert the square image to a data vector for the classifier
@@ -183,7 +188,7 @@ def read_state():
     
             # for debugging
             imsave('predicted/square %d predicted as piece %d.jpg' % (count,prediction),squares[count])
-        
+
             count+=1
 
     
@@ -195,11 +200,15 @@ def read_state():
 
     x=input("""
     Hit return if this is correct, otherwise type a character 
-    and the state will be read from current_board.txt.""")
+    and the state will be read from board.txt... 
+    or type in a Board string like 111/000/222: """)
 
     if x:
-        print("Reading from file...")
-        state=read_state_from_file('board.txt')
+        if "/" in x and '0' in x:
+            state=Board(x)
+        else:
+            print("Reading from file...")
+            state=read_state_from_file('board.txt')
 
     print("Using")
     print(state)
@@ -208,16 +217,16 @@ def read_state():
     return state
 
 
-# In[6]:
+# In[7]:
 
 
-classifier=NaiveBayes()
-classifier.load('naive_bayes_trained.json')
+classifier=CSC()
+classifier.load('CSC_trained.json')
 
 
 # on the laptop, look at the image to see if the state is correct.  remove this imread and imshow on the robot
 
-# In[12]:
+# In[8]:
 
 
 if on_laptop:
@@ -225,7 +234,7 @@ if on_laptop:
     imshow(image)
 
 
-# In[15]:
+# In[9]:
 
 
 if on_laptop:
@@ -234,7 +243,7 @@ if on_laptop:
 
 # ## Now the entire project
 
-# In[9]:
+# In[10]:
 
 
 state=read_state()     #  read the state from the world
