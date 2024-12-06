@@ -148,8 +148,8 @@ def read_state():
 
     
     # load the classifier
-    classifier=NaiveBayes()
-    classifier.load('naive_bayes_trained.json')
+    classifier=CSC()
+    classifier.load('CSC_trained.json')
     
     
     # get the picture
@@ -160,12 +160,16 @@ def read_state():
     # this part comes from your Make Training Squares script
     image=imread(filename)
 
-    # these 5 lines are specific to your image
-    image=image[30:260,20:340,:]  # truncate if you need to
-    gray,black_and_white=get_gray_and_threshold_image(image,threshold=90)
-    corners=find_corners(black_and_white,plotit=False)
+    # these few lines are specific to your image
+    corners= array([[ 64.,  33.],      # <=== check this
+       [295.,  31.],
+       [313., 255.],
+       [ 44., 256.]], dtype=float32) 
+    
     im3=straighten_image(image,corners)
-    squares=get_board_squares_from_image(im3,state.shape)
+    squares=get_board_squares_from_image(im3,
+                                     state.shape,
+                                     middle_pixels=20)  # <=== check this
 
     # for debugging
     if not os.path.exists('predicted'):
@@ -173,6 +177,7 @@ def read_state():
 
     count=0
     values=[]
+    
     for r in range(nr):
         for c in range(nc):
             # convert the square image to a data vector for the classifier
@@ -183,7 +188,7 @@ def read_state():
     
             # for debugging
             imsave('predicted/square %d predicted as piece %d.jpg' % (count,prediction),squares[count])
-        
+
             count+=1
 
     
@@ -195,11 +200,15 @@ def read_state():
 
     x=input("""
     Hit return if this is correct, otherwise type a character 
-    and the state will be read from current_board.txt.""")
+    and the state will be read from board.txt... 
+    or type in a Board string like 111/000/222: """)
 
     if x:
-        print("Reading from file...")
-        state=read_state_from_file('board.txt')
+        if "/" in x and '0' in x:
+            state=Board(x)
+        else:
+            print("Reading from file...")
+            state=read_state_from_file('board.txt')
 
     print("Using")
     print(state)
