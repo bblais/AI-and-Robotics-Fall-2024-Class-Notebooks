@@ -21,10 +21,7 @@ board_picture_folder='images/2024-11-21 - training board images'
 square_images_folder='images/2024-11-21 - training squares'
 image_to_use_for_corners="images/2024-11-21 - training board images/test0.jpg"
 
-corners= array([[ 64.,  33.],
-       [295.,  31.],
-       [313., 255.],
-       [ 44., 256.]], dtype=float32) 
+from corners import *
 
 
 # In[4]:

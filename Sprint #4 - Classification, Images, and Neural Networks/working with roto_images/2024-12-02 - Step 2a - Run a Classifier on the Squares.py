@@ -21,11 +21,7 @@ board_picture_folder='images/rotoimages/'
 square_images_folder='images/rotoimages squares'
 image_to_use_for_corners="images/rotoimages/roto1.jpg"
 
-corners= array([[ 418.,   46.],
-       [1293.,   91.],
-       [1402.,  839.],
-       [ 283.,  801.]], dtype=float32) 
-
+from corners import *
 
 
 # In[4]:

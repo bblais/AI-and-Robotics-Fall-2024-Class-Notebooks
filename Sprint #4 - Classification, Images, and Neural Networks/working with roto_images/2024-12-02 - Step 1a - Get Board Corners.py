@@ -9,7 +9,7 @@
 # - for some reason the "Run All Cells" doesn't print out the corners, but executing the cells one-by-one does. weird.
 # - copy the displayed "corners=..." at the end
 
-# In[7]:
+# In[1]:
 
 
 board_picture_folder='images/rotoimages/'
@@ -17,7 +17,7 @@ square_images_folder='images/rotoimages squares'
 image_to_use_for_corners="images/rotoimages/roto1.jpg"
 
 
-# In[8]:
+# In[2]:
 
 
 get_ipython().run_line_magic('matplotlib', 'qt5')
@@ -27,17 +27,17 @@ from IPython.display import display
 # To install, do this on a commandline
 # > pip install pyqt5
 
-# In[9]:
+# In[3]:
 
 
 from pylab import *
 
 
-# In[10]:
+# In[4]:
 
 
 def on_click(event):
-    from pylab import plot,show,close
+    from pylab import plot,show,close,figure
     global ix, iy
     global corners,fig,ax
     
@@ -53,17 +53,20 @@ def on_click(event):
     show()
 
     if len(corners)==4:
-        print(corners)
         corners=array(sort_corners(corners)).astype(float32)
-        print("\n","corners=",corners.__repr__(),"\n",)
         close(fig)
-        corners=[]
-        
+
+        with open("corners.py","w") as fid:
+            fid.write("from numpy import array,float32\n")
+            fid.write("\n"+"corners="+corners.__repr__()+"\n")
+            fid.write("print(corners.__repr__())\n")
+            
+
     
     return coords
 
 
-# In[11]:
+# In[5]:
 
 
 def sort_corners(corners):
@@ -93,7 +96,7 @@ def sort_corners(corners):
     return new_corners
 
 
-# In[12]:
+# In[6]:
 
 
 corners=[]
@@ -107,6 +110,12 @@ image=imread(filename)
 imshow(image)
 
 cid = fig.canvas.mpl_connect('button_press_event', on_click)
+
+
+# In[7]:
+
+
+corners
 
 
 # In[ ]:

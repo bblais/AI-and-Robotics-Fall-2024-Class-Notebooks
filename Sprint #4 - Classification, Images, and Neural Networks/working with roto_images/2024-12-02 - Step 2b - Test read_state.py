@@ -21,11 +21,11 @@ board_picture_folder='images/rotoimages/'
 square_images_folder='images/rotoimages squares'
 image_to_use_for_corners="images/rotoimages/roto1.jpg"
 
-corners= array([[ 418.,   46.],
-       [1293.,   91.],
+# from corners import *
+corners= array([[ 415.,   46.],
+       [1293.,   84.],
        [1402.,  839.],
-       [ 283.,  801.]], dtype=float32) 
-
+       [ 276.,  801.]], dtype=float32)
 
 
 # - if you want to test the read_state function, pretending to be the robot, copy one of the board images to current_board.jpg

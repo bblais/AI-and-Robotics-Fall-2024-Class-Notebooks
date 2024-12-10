@@ -1,20 +1,17 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[8]:
+# In[1]:
 
 
 board_picture_folder='images/2024-11-21 - training board images'
 square_images_folder='images/2024-11-21 - training squares'
 image_to_use_for_corners="images/2024-11-21 - training board images/test0.jpg"
 
-corners= array([[ 64.,  33.],
-       [295.,  31.],
-       [313., 255.],
-       [ 44., 256.]], dtype=float32) 
+from corners import *
 
 
-# In[9]:
+# In[2]:
 
 
 get_ipython().run_line_magic('matplotlib', 'inline')
@@ -25,13 +22,13 @@ import os
 from Game import Board
 
 
-# In[10]:
+# In[3]:
 
 
 filename=image_to_use_for_corners
 
 
-# In[11]:
+# In[4]:
 
 
 image=imread(filename)

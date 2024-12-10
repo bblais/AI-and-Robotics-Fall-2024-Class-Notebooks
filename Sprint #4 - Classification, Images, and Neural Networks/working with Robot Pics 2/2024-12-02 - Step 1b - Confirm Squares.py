@@ -19,10 +19,7 @@ board_picture_folder='images/Robot Pics 2/'
 square_images_folder='images/Robot Pics 2 squares'
 image_to_use_for_corners="images/Robot Pics 2/image_filename50.jpg"
 
-corners= array([[ 425.,   52.],
-       [1205.,   30.],
-       [1270.,  849.],
-       [ 373.,  862.]], dtype=float32) 
+from corners import *
 
 
 # In[3]:
